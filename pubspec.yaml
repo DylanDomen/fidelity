@@ -1,0 +1,43 @@
+name: fidelity
+description: application fidelity
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: 3.0.4
+
+dependencies:
+  bloc: ^8.1.0
+  firebase_core: ^2.0.0
+  flow_builder: ^0.0.9
+  firedart: ^0.9.0+1
+  equatable: ^2.0.5
+  cloud_firestore: ^4.0.4
+  cloud_firestore_odm: ^1.0.0-dev.39
+  desktop_window: ^0.4.0
+  fake_cloud_firestore: ^2.0.1
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  formz: ^0.4.1
+  google_fonts: ^3.0.1
+  json_annotation: ^4.7.0
+
+dev_dependencies:
+  bloc_test: ^9.1.0
+  cloud_firestore_odm_generator: ^1.0.0-dev.39
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.1.0
+
+  build_runner: ^2.3.0
+  json_serializable: ^6.5.4
+
+flutter:
+  uses-material-design: true
+  generate: true

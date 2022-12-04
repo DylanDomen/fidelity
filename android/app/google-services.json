@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "970607390387",
+    "project_id": "fidelity-fire",
+    "storage_bucket": "fidelity-fire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970607390387:android:110619f54decb7bdd0cac6",
+        "android_client_info": {
+          "package_name": "com.creappi.projet.fidelity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970607390387-3jho226i7sg46h8mlreleu32oeebg15t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcgsqChXUws6YMPwCo2bQk0sCmZdhVxsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970607390387-3jho226i7sg46h8mlreleu32oeebg15t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
