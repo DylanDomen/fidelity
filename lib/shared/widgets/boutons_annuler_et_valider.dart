@@ -37,23 +37,15 @@ class BoutonRetourEtSuivant extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.only(left: 9, right: 9),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                Flexible(
-                  child: Text(
-                    'Retour',
-                    style: labelBouton,
-                  ),
-                ),
-              ],
+            child: Center(
+              child: Text(
+                'Retour',
+                style: labelBouton,
+              ),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 40,
         ),
         InkWell(
@@ -67,19 +59,11 @@ class BoutonRetourEtSuivant extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.only(left: 9, right: 9),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                Flexible(
-                  child: Text(
-                    'Valider',
-                    style: labelBouton,
-                  ),
-                ),
-              ],
+            child: Center(
+              child: Text(
+                'Valider',
+                style: labelBouton,
+              ),
             ),
           ),
         ),
