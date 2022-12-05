@@ -12,6 +12,17 @@ TextStyle labelStyle = GoogleFonts.barlow(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle labelTitre = GoogleFonts.barlow(
+  color: const Color(0xff023047),
+  fontSize: 26,
+  fontWeight: FontWeight.w600,
+);
+TextStyle labelTitre_50 = GoogleFonts.barlow(
+  color: const Color(0xff023047),
+  fontSize: 50,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle normalErreurStyle_1 = GoogleFonts.barlow(
   color: const Color(0xffC44B4A),
   fontSize: 12,

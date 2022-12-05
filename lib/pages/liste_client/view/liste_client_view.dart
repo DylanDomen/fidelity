@@ -27,31 +27,51 @@ class ListeClientView extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BoutonSansIcon(
-                  key: const Key('BtnScannerCarteFidélité'),
-                  largeur: 230,
-                  onTapCallback: () => null,
-                  texte: 'Scanner carte fidélité',
+                Container(
+                  width: 40,
                 ),
-                const SizedBox(
-                  width: 20,
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      BoutonSansIcon(
+                        key: const Key('BtnScannerCarteFidélité'),
+                        largeur: 230,
+                        onTapCallback: () => null,
+                        texte: 'Scanner carte fidélité',
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      BoutonSansIcon(
+                        key: const Key('BtnCarteFidélitéViaMobile'),
+                        largeur: 230,
+                        onTapCallback: () => null,
+                        texte: 'Carte fidélité via mobile',
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      BoutonSansIcon(
+                        key: const Key('BtnCarteFidélitéViaMail'),
+                        largeur: 230,
+                        onTapCallback: () => null,
+                        texte: 'Carte fidélité via mail',
+                      ),
+                    ],
+                  ),
                 ),
-                BoutonSansIcon(
-                  key: const Key('BtnCarteFidélitéViaMobile'),
-                  largeur: 230,
-                  onTapCallback: () => null,
-                  texte: 'Carte fidélité via mobile',
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                BoutonSansIcon(
-                  key: const Key('BtnCarteFidélitéViaMail'),
-                  largeur: 230,
-                  onTapCallback: () => null,
-                  texte: 'Carte fidélité via mail',
+                BoutonSansTexte(
+                  onPress: () => print('deconexion'),
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                  color: couleurBoutonFermer,
+                  key: const Key('BtnDeconnexion'),
                 ),
               ],
             ),
