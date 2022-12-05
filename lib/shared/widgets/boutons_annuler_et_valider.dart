@@ -39,7 +39,7 @@ class BoutonRetourEtSuivant extends StatelessWidget {
             padding: const EdgeInsets.only(left: 9, right: 9),
             child: Center(
               child: Text(
-                'Retour',
+                'Annuler',
                 style: labelBouton,
               ),
             ),

@@ -29,7 +29,7 @@ class CreerClientView extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Ajouter un client',
+              "Création d'un client",
               style: labelTitre,
             ),
             const SizedBox(
