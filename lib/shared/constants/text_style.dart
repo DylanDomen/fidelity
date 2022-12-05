@@ -24,18 +24,26 @@ TextStyle normalStyle_1 = GoogleFonts.barlow(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle normalStyle_20 = GoogleFonts.barlow(
+  color: const Color(0xff219EBC),
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle hintTextStyle_1 = GoogleFonts.barlow(
   color: const Color(0xff92CFE0),
   fontSize: 14,
   fontWeight: FontWeight.w600,
 );
 
-//==================================================
 TextStyle titreStyle_1 = GoogleFonts.barlow(
-  color: const Color(0xff41598F),
+  color: const Color(0xff023047),
   fontSize: 26,
   fontWeight: FontWeight.w700,
 );
+
+//==================================================
+
 TextStyle titreStyleSouligne = GoogleFonts.barlow(
   color: const Color(0xff41598F),
   fontSize: 26,
