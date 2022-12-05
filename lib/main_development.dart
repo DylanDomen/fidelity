@@ -9,7 +9,7 @@ import 'dart:async';
 
 import 'package:desktop_window/desktop_window.dart';
 import 'package:fidelity/bootstrap.dart';
-import 'package:fidelity/pages/ajout_achat/ajout_achat.dart';
+import 'package:fidelity/pages/connexion/connexion.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ Future<void> main() async {
 
   await bootstrap(
     () => const MaterialApp(
-      home: AjoutAchatPage(),
+      home: ConnexionPage(),
     ),
   );
 }
