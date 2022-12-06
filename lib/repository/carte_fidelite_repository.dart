@@ -27,7 +27,7 @@ class CarteFideliteRepository {
     try {
       await firestore
           .collection(nomCollection)
-          .document(carteFidelite.uidCarteFidelite)
+          .document(carteFidelite.uidCarteFidelite!)
           .set(carteFidelite.toJson());
     } catch (e) {
       throw Exception('Modification carteFidelite impossible !');
@@ -52,7 +52,7 @@ class CarteFideliteRepository {
   }) {
     return firestore
         .collection(nomCollection)
-        .document(carteFidelite.uidCarteFidelite);
+        .document(carteFidelite.uidCarteFidelite!);
   }
 
   Stream<CarteFidelite?> selectionneCarteFidelite({

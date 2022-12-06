@@ -8,10 +8,12 @@ List<Page<dynamic>> onGenerateAppViewPages({
   required AppState appState,
   List<Page<dynamic>>? pages,
 }) {
+  print('switch');
   switch (appState.etapeApp) {
     case EtapeApp.connexion:
       return [ConnexionPage.page()];
     case EtapeApp.listeClient:
+      print('route');
       return [ListeClientPage.page()];
     case EtapeApp.infosClient:
       return [InfosClientPage.page()];

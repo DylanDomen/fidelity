@@ -28,7 +28,7 @@ class AchatRepository {
     try {
       await firestore
           .collection(nomCollection)
-          .document(achat.uidAchat)
+          .document(achat.uidAchat!)
           .set(achat.toJson());
     } catch (e) {
       throw Exception('Modification achat impossible !');
@@ -48,7 +48,7 @@ class AchatRepository {
   DocumentReference retourneAchatDocReference({
     required Achat achat,
   }) {
-    return firestore.collection(nomCollection).document(achat.uidAchat);
+    return firestore.collection(nomCollection).document(achat.uidAchat!);
   }
 
   Stream<Achat?> selectionneAchat({

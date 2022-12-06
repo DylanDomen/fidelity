@@ -1,9 +1,12 @@
+import 'package:fidelity/models/champs/email.dart';
+import 'package:fidelity/models/champs/mot_de_passe.dart';
 import 'package:fidelity/pages/connexion/connexion.dart';
 import 'package:fidelity/shared/constants/colors.dart';
 import 'package:fidelity/shared/constants/text_style.dart';
 import 'package:fidelity/shared/widgets/text_field_custom.dart';
 import 'package:fidelity/shared/widgets/textfield_avec_titre_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -42,17 +45,22 @@ class ConnexionView extends StatelessWidget {
                   titre: 'Adresse mail',
                   textFieldCustom: TextFieldCustom(
                     key: const Key('TextFieldMail'),
-                    formzInput: null, //const ChampMail.pure(),
+                    formzInput:
+                        connexionCubit.state.mail, //const ChampMail.pure(),
                     hintText: 'mail@gmail.com',
-                    messageErreur: 'Mail incorrect',
+                    messageErreur: connexionCubit.state.mail.error?.msgErreur,
                     prefixIcon: const Icon(
                       FontAwesomeIcons.envelope,
                       color: couleurIcons,
                       size: 25,
                     ),
-                    onChangedMethod: (mail) => null,
-                    // onChangedMethod: (nom) =>
-                    //     listeClientCubit.mailModifier(mailTexte: mail),
+                    listeInputFormatter: [
+                      FilteringTextInputFormatter.deny(
+                        RegExp(r'[/\\><!?|%&$^]'),
+                      ),
+                    ],
+                    onChangedMethod: (mail) =>
+                        connexionCubit.mailModifier(mailTexte: mail),
                   ),
                 ),
                 const SizedBox(
@@ -61,26 +69,26 @@ class ConnexionView extends StatelessWidget {
                 TextFieldAvecTitreCustom(
                   titre: 'Mot de passe',
                   textFieldCustom: TextFieldCustom(
+                    obscurcisText: true,
                     key: const Key('TextFieldMdp'),
-                    formzInput: null, //const ChampMail.pure(),
+                    formzInput: connexionCubit.state.motDePasse,
                     hintText: '**********',
-                    messageErreur: 'Mot de passe incorrect',
+                    messageErreur:
+                        connexionCubit.state.motDePasse.error?.msgErreur,
                     prefixIcon: const Icon(
                       FontAwesomeIcons.lock,
                       color: couleurIcons,
                       size: 25,
                     ),
-                    onChangedMethod: (motDePasse) => null,
-                    // onChangedMethod: (nom) =>
-                    //     listeClientCubit.mailModifier(mailTexte: mail),
+                    onChangedMethod: (motDePasse) => connexionCubit
+                        .motDePasseModifier(motDePasseTexte: motDePasse),
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 InkWell(
-                  onTap: () => print('connexion'),
-                  //onPressed: connexionCubit.state.status.isValidated ? connexionCubit.submit : null,
+                  onTap: connexionCubit.submit,
                   child: Container(
                     key: const Key('BtnConnexion'),
                     width: 230,

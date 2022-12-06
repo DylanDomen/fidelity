@@ -1,3 +1,8 @@
+import 'package:fidelity/app/bloc/app_bloc.dart';
+import 'package:fidelity/models/champs/champ_texte.dart';
+import 'package:fidelity/models/champs/email.dart';
+import 'package:fidelity/models/champs/mobile.dart';
+import 'package:fidelity/pages/creer_client/creer_client.dart';
 import 'package:fidelity/pages/liste_client/liste_client.dart';
 import 'package:fidelity/shared/constants/autres.dart';
 import 'package:fidelity/shared/constants/colors.dart';
@@ -20,6 +25,7 @@ class ListeClientView extends StatelessWidget {
 
     final width = (MediaQuery.of(context).size.width - 370) / 2;
     final size = MediaQuery.of(context).size.width;
+    final appBloc = context.watch<AppBloc>();
 
     return WillPopScope(
       onWillPop: () async => _retour(),
@@ -71,7 +77,7 @@ class ListeClientView extends StatelessWidget {
                   ),
                 ),
                 BoutonSansTexte(
-                  onPress: () => print('deconexion'),
+                  onPress: listeClientCubit.deconnexion,
                   icon: const Icon(
                     Icons.logout,
                     color: Colors.white,
@@ -112,9 +118,10 @@ class ListeClientView extends StatelessWidget {
                             titre: 'Nom',
                             textFieldCustom: TextFieldCustom(
                               key: const Key('TextFieldNom'),
-                              formzInput: null, //const ChampTexte.pure(),
+                              formzInput: listeClientCubit.state.nom,
                               hintText: 'Tarik',
-                              messageErreur: 'Nom incorrect',
+                              messageErreur:
+                                  listeClientCubit.state.nom.error?.msgErreur,
                               prefixIcon: const Icon(
                                 FontAwesomeIcons.user,
                                 color: couleurIcons,
@@ -125,9 +132,8 @@ class ListeClientView extends StatelessWidget {
                                   RegExp(r'[/\\><!?|%&$^]'),
                                 ),
                               ],
-                              onChangedMethod: (nom) => null,
-                              // onChangedMethod: (nom) =>
-                              //     listeClientCubit.nomModifier(nomTexte: nom),
+                              onChangedMethod: (nom) =>
+                                  listeClientCubit.nomModifier(nomTexte: nom),
                             ),
                           ),
                         ),
@@ -139,9 +145,10 @@ class ListeClientView extends StatelessWidget {
                             titre: 'Adresse mail',
                             textFieldCustom: TextFieldCustom(
                               key: const Key('TextFieldMail'),
-                              formzInput: null, //const ChampMail.pure(),
+                              formzInput: listeClientCubit.state.mail,
                               hintText: 'mail@gmail.com',
-                              messageErreur: 'Mail incorrect',
+                              messageErreur:
+                                  listeClientCubit.state.mail.error?.msgErreur,
                               prefixIcon: const Icon(
                                 FontAwesomeIcons.envelope,
                                 color: couleurIcons,
@@ -152,9 +159,8 @@ class ListeClientView extends StatelessWidget {
                                   RegExp(r'[/\\><!?|%&$^]'),
                                 ),
                               ],
-                              onChangedMethod: (mail) => null,
-                              // onChangedMethod: (nom) =>
-                              //     listeClientCubit.mailModifier(mailTexte: mail),
+                              onChangedMethod: (mail) => listeClientCubit
+                                  .mailModifier(mailTexte: mail),
                             ),
                           ),
                         ),
@@ -166,9 +172,10 @@ class ListeClientView extends StatelessWidget {
                             titre: 'Mobile',
                             textFieldCustom: TextFieldCustom(
                               key: const Key('TextFieldMobile'),
-                              formzInput: null, //const ChampMobile.pure(),
+                              formzInput: listeClientCubit.state.mobile,
                               hintText: '0692122356',
-                              messageErreur: 'Mobile incorrect',
+                              messageErreur: listeClientCubit
+                                  .state.mobile.error?.msgErreur,
                               prefixIcon: const Icon(
                                 Icons.phone,
                                 color: couleurIcons,
@@ -179,9 +186,8 @@ class ListeClientView extends StatelessWidget {
                                   RegExp(r'^\d{0,10}$'),
                                 ),
                               ],
-                              onChangedMethod: (mobile) => null,
-                              // onChangedMethod: (mobile) => listeClientCubit
-                              //     .mobileModifier(mobileTexte: mobile),
+                              onChangedMethod: (mobile) => listeClientCubit
+                                  .mobileModifier(mobileTexte: mobile),
                             ),
                           ),
                         ),
@@ -217,8 +223,10 @@ class ListeClientView extends StatelessWidget {
                     if (index == 0) {
                       return InkWell(
                         key: const Key('InkwellAjoutClient'),
-                        onTap: () => print('AjoutClient'),
-                        //onTap: listeClientCubit.creerClient,
+                        onTap: () => _ajouterUnClient(
+                          appBloc: appBloc,
+                          context: context,
+                        ),
                         child: Container(
                           padding: EdgeInsets.zero,
                           decoration: const BoxDecoration(
@@ -249,13 +257,12 @@ class ListeClientView extends StatelessWidget {
                     }
                     return InkWell(
                       key: const Key('InkwellLigneClient'),
-                      onTap: () => print('client ${index - 1}'),
-                      // onTap: () {
-                      //   listeClientCubit.selectionneClient(
-                      //     client: listeClientCubit
-                      //         .state.listeClientsFiltre[index - 1],
-                      //   );
-                      // },
+                      onTap: () {
+                        listeClientCubit.selectionneClient(
+                          utilisateur: listeClientCubit
+                              .state.listeClientsFiltre[index - 1],
+                        );
+                      },
                       child: Container(
                         key: const Key('ContainerClient'),
                         padding: const EdgeInsets.all(10),
@@ -281,9 +288,8 @@ class ListeClientView extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: Text(
-                                      // '${listeClientCubit.state.listeClientsFiltre[index - 1].nom} '
-                                      // '${listeClientCubit.state.listeClientsFiltre[index - 1].prenom}',
-                                      'Tarik Ochet',
+                                      '${listeClientCubit.state.listeClientsFiltre[index - 1].nom} '
+                                      '${listeClientCubit.state.listeClientsFiltre[index - 1].prenom}',
                                       style: normalStyle_1,
                                       key: const Key('TexteNomPrenom'),
                                     ),
@@ -293,26 +299,24 @@ class ListeClientView extends StatelessWidget {
                             ),
                             Flexible(
                               child: Text(
-                                // listeClientCubit
-                                //     .state
-                                //     .listeClientsFiltre[index - 1]
-                                //     .telephone,
-                                '0692152132',
+                                listeClientCubit
+                                    .state.listeClientsFiltre[index - 1].mobile,
                                 style: normalStyle_1,
                                 key: const Key('TexteMobile'),
                               ),
                             ),
                             Flexible(
                               child: Text(
-                                // listeClientCubit
-                                //     .state.listeClientsFiltre[index - 1].mail,
-                                'mail@gmail.com',
+                                listeClientCubit
+                                    .state.listeClientsFiltre[index - 1].mail,
                                 style: normalStyle_1,
                                 key: const Key('TexteMail'),
                               ),
                             ),
                             BoutonSansTexte(
-                              onPress: () => print('supprimer ${index - 1}'),
+                              onPress: () => listeClientCubit.supprimerClient(
+                                  utilisateur: listeClientCubit
+                                      .state.listeClientsFiltre[index - 1]),
                               icon: const Icon(
                                 FontAwesomeIcons.trash,
                                 color: Colors.white,
@@ -326,8 +330,8 @@ class ListeClientView extends StatelessWidget {
                       ),
                     );
                   },
-                  itemCount: 100,
-                  //itemCount: listeClientCubit.state.listeClientsFiltre.length + 1,
+                  itemCount:
+                      listeClientCubit.state.listeClientsFiltre.length + 1,
                 ),
               ),
             ),
@@ -339,5 +343,17 @@ class ListeClientView extends StatelessWidget {
 
   bool _retour() {
     return true;
+  }
+
+  Future<void> _ajouterUnClient({
+    required BuildContext context,
+    required AppBloc appBloc,
+  }) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible:
+          true, // false = user must tap button, true = tap outside dialog
+      builder: (BuildContext dialogContext) => const CreerClientPage(),
+    );
   }
 }

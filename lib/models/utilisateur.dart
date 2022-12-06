@@ -20,7 +20,7 @@ const firestoreSerializable = JsonSerializable(
 @firestoreSerializable
 class Utilisateur extends Equatable {
   const Utilisateur({
-    required this.uidUtilisateur,
+    this.uidUtilisateur,
     required this.nom,
     required this.role,
     required this.mobile,
@@ -32,7 +32,7 @@ class Utilisateur extends Equatable {
 
   Map<String, Object?> toJson() => _$UtilisateurToJson(this);
 
-  final String uidUtilisateur;
+  final String? uidUtilisateur;
   final String nom;
   final Role role;
   final String mobile;

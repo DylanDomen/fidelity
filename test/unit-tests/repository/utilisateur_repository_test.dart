@@ -1,6 +1,7 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:fidelity/models/role.dart';
 import 'package:fidelity/models/utilisateur.dart';
+import 'package:fidelity/repository/authentification_repository.dart';
 import 'package:fidelity/repository/utilisateur_repository.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,11 @@ class MockDocumentReference extends Mock implements DocumentReference {}
 
 class MockCollectionReference extends Mock implements CollectionReference {}
 
+class MockAuthentificationRepository extends Mock
+    implements AuthentificationRepository {}
+
+class MockUser extends Mock implements UserEquatable {}
+
 void main() {
   late Utilisateur utilisateur;
   late UtilisateurRepository utilisateurRepository;
@@ -23,6 +29,8 @@ void main() {
   late Document document2;
   late DocumentReference documentReference;
   late CollectionReference collectionReference;
+  late AuthentificationRepository authentificationRepository;
+  late UserEquatable user;
 
   setUp(() async {
     firestore = MockFirestore();
@@ -30,6 +38,8 @@ void main() {
     document2 = MockDocument();
     documentReference = MockDocumentReference();
     collectionReference = MockCollectionReference();
+    authentificationRepository = MockAuthentificationRepository();
+    user = MockUser();
 
     utilisateur = const Utilisateur(
       uidUtilisateur: 'uid',
@@ -42,6 +52,7 @@ void main() {
     fakeFirebaseFirestore = FakeFirebaseFirestore();
     utilisateurRepository = UtilisateurRepository(
       firestore: firestore,
+      authentificationRepository: authentificationRepository,
     );
 
     when(
@@ -78,7 +89,16 @@ void main() {
     ).thenReturn(utilisateur.copywith(uidUtilisateur: 'uid').toJson());
     when(
       () => document2.map,
-    ).thenReturn(utilisateur.copywith(uidUtilisateur: 'uid2').toJson());
+    ).thenReturn(utilisateur
+        .copywith(uidUtilisateur: 'uid2', role: Role.caissier)
+        .toJson());
+    when(
+      () => authentificationRepository.inscriptionAvecEmailEtMotDePasse(
+          email: any(named: 'email'), password: any(named: 'password')),
+    ).thenAnswer((invocation) => Future.value(user));
+    when(
+      () => user.id,
+    ).thenReturn('uid');
   });
 
   test('Ajouter utilisateur', () async {
@@ -136,12 +156,28 @@ void main() {
 
   test('liste utilisateur', () async {
     final utilisateur1 = utilisateur.copywith(uidUtilisateur: 'uid');
-    final utilisateur2 = utilisateur.copywith(uidUtilisateur: 'uid2');
+    final utilisateur2 =
+        utilisateur.copywith(uidUtilisateur: 'uid2', role: Role.caissier);
     final streamListeUtilisateurs = utilisateurRepository.listeUtilisateur();
     expect(
       streamListeUtilisateurs,
       emits(
         [utilisateur1, utilisateur2],
+      ),
+    );
+    verify(
+      () => collectionReference.stream,
+    ).called(1);
+  });
+
+  test('liste clients', () async {
+    final utilisateur1 = utilisateur.copywith(uidUtilisateur: 'uid');
+    final utilisateur2 = utilisateur.copywith(uidUtilisateur: 'uid2');
+    final streamListeUtilisateurs = utilisateurRepository.listeClients();
+    expect(
+      streamListeUtilisateurs,
+      emits(
+        [utilisateur1],
       ),
     );
     verify(
