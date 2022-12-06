@@ -5,13 +5,17 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:fidelity/app/bloc/app_bloc.dart';
+import 'package:fidelity/app/route_app.dart';
 import 'package:fidelity/counter/counter.dart';
 import 'package:fidelity/l10n/l10n.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class AppView extends StatelessWidget {
+  const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,11 @@ class App extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: FlowBuilder<AppState>(
+        state: context.select((AppBloc bloc) => bloc.state),
+        onGeneratePages: (appState, pages) =>
+            onGenerateAppViewPages(appState: appState),
+      ),
     );
   }
 }

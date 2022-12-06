@@ -146,42 +146,46 @@ class AjoutAchatView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      'Nombre de points gagné',
-                      style: labelStyle,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: Text(
-                        '1',
-                        style: labelTitre,
+                Flexible(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Nombre de points gagné',
+                        style: labelStyle,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                        child: Text(
+                          '1',
+                          style: labelTitre,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      'Nombre de points perdu',
-                      style: labelStyle,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: Text(
-                        '140',
-                        style: labelTitre,
+                Flexible(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Nombre de points perdu',
+                        style: labelStyle,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                        child: Text(
+                          '140',
+                          style: labelTitre,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

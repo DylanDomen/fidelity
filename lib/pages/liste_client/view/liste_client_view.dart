@@ -36,29 +36,35 @@ class ListeClientView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BoutonSansIcon(
-                        key: const Key('BtnScannerCarteFidélité'),
-                        largeur: 230,
-                        onTapCallback: () => null,
-                        texte: 'Scanner carte fidélité',
+                      Flexible(
+                        child: BoutonSansIcon(
+                          key: const Key('BtnScannerCarteFidélité'),
+                          largeur: 230,
+                          onTapCallback: () => null,
+                          texte: 'Scanner carte fidélité',
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      BoutonSansIcon(
-                        key: const Key('BtnCarteFidélitéViaMobile'),
-                        largeur: 230,
-                        onTapCallback: () => null,
-                        texte: 'Carte fidélité via mobile',
+                      Flexible(
+                        child: BoutonSansIcon(
+                          key: const Key('BtnCarteFidélitéViaMobile'),
+                          largeur: 230,
+                          onTapCallback: () => null,
+                          texte: 'Carte fidélité via mobile',
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      BoutonSansIcon(
-                        key: const Key('BtnCarteFidélitéViaMail'),
-                        largeur: 230,
-                        onTapCallback: () => null,
-                        texte: 'Carte fidélité via mail',
+                      Flexible(
+                        child: BoutonSansIcon(
+                          key: const Key('BtnCarteFidélitéViaMail'),
+                          largeur: 230,
+                          onTapCallback: () => null,
+                          texte: 'Carte fidélité via mail',
+                        ),
                       ),
                     ],
                   ),
@@ -209,9 +215,11 @@ class ListeClientView extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Ajouter un client',
-                                style: normalStyle_20,
+                              Flexible(
+                                child: Text(
+                                  'Ajouter un client',
+                                  style: normalStyle_20,
+                                ),
                               ),
                               const Icon(
                                 Icons.add,

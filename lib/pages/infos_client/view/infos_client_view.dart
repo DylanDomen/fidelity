@@ -40,109 +40,120 @@ class InfosClientView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Container(
-                        width: 330,
-                        height: 290,
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
-                          color: Colors.white,
-                          boxShadow: [
-                            boxShadow,
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Informations client',
-                                  style: labelTitre,
+                      Flexible(
+                        child: Container(
+                          width: 330,
+                          height: 290,
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            color: Colors.white,
+                            boxShadow: [
+                              boxShadow,
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        'Informations client',
+                                        style: labelTitre,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    BoutonSansTexte(
+                                      onPress: () => print('Modfieir client'),
+                                      icon: const Icon(
+                                        FontAwesomeIcons.pen,
+                                        color: Colors.white,
+                                        size: 15,
+                                      ),
+                                      color: couleurBouton,
+                                      key: const Key('BtnDeconnexion'),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  width: 15,
+                              ),
+                              const Spacer(),
+                              Flexible(
+                                child: Text(
+                                  'Désignation : Tarik Ochet',
+                                  style: labelStyle,
                                 ),
-                                BoutonSansTexte(
-                                  onPress: () => print('Modfieir client'),
-                                  icon: const Icon(
-                                    FontAwesomeIcons.pen,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                  color: couleurBouton,
-                                  key: const Key('BtnDeconnexion'),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  'Mail : mail@gmail.com',
+                                  style: labelStyle,
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              'Désignation : Tarik Ochet',
-                              style: labelStyle,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'Mail : mail@gmail.com',
-                              style: labelStyle,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'Mobile : 0692 12 23 56',
-                              style: labelStyle,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'Numéro carte fidélité : fAbcd854ed',
-                              style: labelStyle,
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                          ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  'Mobile : 0692 12 23 56',
+                                  style: labelStyle,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  'Numéro carte fidélité : fAbcd854ed',
+                                  style: labelStyle,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: 330,
-                        height: 290,
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
-                          color: Colors.white,
-                          boxShadow: [
-                            boxShadow,
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Points de fidélité',
-                                style: labelTitre,
+                      Flexible(
+                        child: Container(
+                          width: 330,
+                          height: 290,
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            color: Colors.white,
+                            boxShadow: [
+                              boxShadow,
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  'Points de fidélité',
+                                  style: labelTitre,
+                                ),
                               ),
-                            ),
-                            Flexible(
-                              flex: 4,
-                              child: Text(
-                                '150',
-                                style: labelTitre_50,
+                              Flexible(
+                                flex: 4,
+                                child: Text(
+                                  '150',
+                                  style: labelTitre_50,
+                                ),
                               ),
-                            ),
-                            const Spacer(),
-                          ],
+                              const Spacer(),
+                            ],
+                          ),
                         ),
                       ),
                     ],
