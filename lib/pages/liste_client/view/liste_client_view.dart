@@ -7,6 +7,7 @@ import 'package:fidelity/shared/widgets/bouton_sans_texte.dart';
 import 'package:fidelity/shared/widgets/text_field_custom.dart';
 import 'package:fidelity/shared/widgets/textfield_avec_titre_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -119,6 +120,11 @@ class ListeClientView extends StatelessWidget {
                                 color: couleurIcons,
                                 size: 25,
                               ),
+                              listeInputFormatter: [
+                                FilteringTextInputFormatter.deny(
+                                  RegExp(r'[/\\><!?|%&$^]'),
+                                ),
+                              ],
                               onChangedMethod: (nom) => null,
                               // onChangedMethod: (nom) =>
                               //     listeClientCubit.nomModifier(nomTexte: nom),
@@ -141,6 +147,11 @@ class ListeClientView extends StatelessWidget {
                                 color: couleurIcons,
                                 size: 25,
                               ),
+                              listeInputFormatter: [
+                                FilteringTextInputFormatter.deny(
+                                  RegExp(r'[/\\><!?|%&$^]'),
+                                ),
+                              ],
                               onChangedMethod: (mail) => null,
                               // onChangedMethod: (nom) =>
                               //     listeClientCubit.mailModifier(mailTexte: mail),
@@ -156,13 +167,18 @@ class ListeClientView extends StatelessWidget {
                             textFieldCustom: TextFieldCustom(
                               key: const Key('TextFieldMobile'),
                               formzInput: null, //const ChampMobile.pure(),
-                              hintText: '06 92 12 23 56',
+                              hintText: '0692122356',
                               messageErreur: 'Mobile incorrect',
                               prefixIcon: const Icon(
                                 Icons.phone,
                                 color: couleurIcons,
                                 size: 25,
                               ),
+                              listeInputFormatter: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'^\d{0,10}$'),
+                                ),
+                              ],
                               onChangedMethod: (mobile) => null,
                               // onChangedMethod: (mobile) => listeClientCubit
                               //     .mobileModifier(mobileTexte: mobile),
