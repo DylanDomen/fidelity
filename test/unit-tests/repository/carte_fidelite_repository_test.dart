@@ -143,6 +143,12 @@ void main() {
     expect(streamCarteFidelite, emits(carteFidelite));
   });
 
+  test('Selectionne carteFidelite via uid utilisateur', () async {
+    final streamCarteFidelite = carteFideliteRepository
+        .selectionneCarteFideliteViaUidUtilisateur(uidUtilisateur: 'd6JrB');
+    expect(streamCarteFidelite, emits(carteFidelite));
+  });
+
   test('Selectionne carteFidelite mais id vide', () async {
     final streamCarteFidelite =
         carteFideliteRepository.selectionneCarteFidelite(

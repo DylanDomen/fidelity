@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fidelity/models/carte_fidelite.dart';
 import 'package:fidelity/models/champs/champ_texte.dart';
 import 'package:fidelity/models/champs/email.dart';
 import 'package:fidelity/models/champs/mobile.dart';
 import 'package:fidelity/models/role.dart';
 import 'package:fidelity/models/utilisateur.dart';
+import 'package:fidelity/repository/carte_fidelite_repository.dart';
 import 'package:fidelity/repository/utilisateur_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
@@ -15,10 +17,12 @@ class CreerClientCubit extends Cubit<CreerClientState> {
   CreerClientCubit({
     required this.utilisateurRepository,
     required this.navigatorState,
+    required this.carteFideliteRepository,
   }) : super(const CreerClientState());
 
   final UtilisateurRepository utilisateurRepository;
   final NavigatorState navigatorState;
+  final CarteFideliteRepository carteFideliteRepository;
 
   void nomModifier({required String nomTexte}) {
     final nom = ChampTexte.dirty(nomTexte);
@@ -108,22 +112,75 @@ class CreerClientCubit extends Cubit<CreerClientState> {
     if (state.status.isValidated) {
       emit(state.copywith(status: FormzStatus.submissionInProgress));
       try {
-        await utilisateurRepository.ajouterUtilisateur(
-          utilisateur: Utilisateur(
-            nom: state.nom.value,
-            role: Role.client,
-            mobile: state.mobile.value,
-            mail: state.mail.value,
-            prenom: state.prenom.value,
+        final carteFidelite = await carteFideliteRepository
+            .verifieCarteFideliteExisteViaNumeroCarte(
+          numeroCarte: state.numCarteFidelite.value,
+        );
+
+        if (carteFidelite == null) {
+          final utilisateurAjouter =
+              await utilisateurRepository.ajouterUtilisateur(
+            utilisateur: Utilisateur(
+              nom: state.nom.value,
+              role: Role.client,
+              mobile: state.mobile.value,
+              mail: state.mail.value,
+              prenom: state.prenom.value,
+            ),
+          );
+          await carteFideliteRepository.creerCarteFidelite(
+            carteFidelite: CarteFidelite(
+              numeroCarte: state.numCarteFidelite.value,
+              pointsFidelite: 0,
+              mobileUtilisateur: state.mobile.value,
+              mailUtilisateur: state.mail.value,
+              nomPrenomUtilisateur: '${state.nom.value} ${state.prenom.value}',
+              uidUtilisateur: utilisateurAjouter.uidUtilisateur!,
+            ),
+          );
+          emit(state.copywith(status: FormzStatus.submissionSuccess));
+          fermer();
+        } else {
+          emit(
+            state.copywith(
+              status: FormzStatus.submissionFailure,
+              messageErreur: 'Cette carte de fidélité est déjà attribué',
+            ),
+          );
+          emit(
+            state.copywith(
+              status: FormzStatus.submissionFailure,
+              messageErreur: '',
+            ),
+          );
+        }
+      } catch (e) {
+        emit(
+          state.copywith(
+            status: FormzStatus.submissionFailure,
+            messageErreur: e.toString(),
           ),
         );
-        emit(state.copywith(status: FormzStatus.submissionSuccess));
-        fermer();
-      } catch (e) {
-        emit(state.copywith(status: FormzStatus.submissionFailure));
+        emit(
+          state.copywith(
+            status: FormzStatus.submissionFailure,
+            messageErreur: '',
+          ),
+        );
       }
     } else {
-      emit(state.copywith(status: FormzStatus.submissionFailure));
+      emit(
+        state.copywith(
+          status: FormzStatus.submissionFailure,
+          messageErreur: 'Formulaire invalide',
+        ),
+      );
+      emit(
+        state.copywith(
+          status: FormzStatus.submissionFailure,
+          messageErreur: '',
+        ),
+      );
     }
   }
 }

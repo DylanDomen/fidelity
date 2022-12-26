@@ -4,6 +4,7 @@ import 'package:fidelity/models/champs/email.dart';
 import 'package:fidelity/models/champs/mobile.dart';
 import 'package:fidelity/models/utilisateur.dart';
 import 'package:fidelity/pages/creer_client/creer_client.dart';
+import 'package:fidelity/repository/carte_fidelite_repository.dart';
 import 'package:fidelity/repository/utilisateur_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,10 +16,14 @@ class MockUtilisateurRepository extends Mock implements UtilisateurRepository {}
 
 class MockUtilisateur extends Mock implements Utilisateur {}
 
+class MockCarteFidelityRepository extends Mock
+    implements CarteFideliteRepository {}
+
 class FakeUtilisateur extends Fake implements Utilisateur {}
 
 void main() {
   late UtilisateurRepository utilisateurRepository;
+  late CarteFideliteRepository carteFideliteRepository;
   late NavigatorState navigatorState;
   late Utilisateur utilisateur;
 
@@ -28,6 +33,7 @@ void main() {
 
   setUp(() {
     utilisateurRepository = MockUtilisateurRepository();
+    carteFideliteRepository = MockCarteFidelityRepository();
     navigatorState = MockNavigator();
     utilisateur = MockUtilisateur();
   });
@@ -38,6 +44,7 @@ void main() {
         CreerClientCubit(
           utilisateurRepository: utilisateurRepository,
           navigatorState: navigatorState,
+          carteFideliteRepository: carteFideliteRepository,
         ).state,
         const CreerClientState(),
       );
@@ -50,6 +57,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       )..emit(const CreerClientState(status: FormzStatus.valid)),
       act: (bloc) => bloc.submit(),
       expect: () => const [
@@ -64,6 +72,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) => bloc.nomModifier(nomTexte: 'Domen'),
       expect: () => const [
@@ -80,6 +89,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) => bloc.prenomModifier(prenomTexte: 'Dylan'),
       expect: () => const [
@@ -96,6 +106,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) => bloc.mailModifier(mailTexte: 'mail@gmail.com'),
       expect: () => const [
@@ -112,6 +123,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) => bloc.mobileModifier(mobileTexte: '0692102030'),
       expect: () => const [
@@ -128,6 +140,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) =>
           bloc.numCarteFideliteModifier(numCarteFideliteTexte: 'FArd1542d'),
@@ -145,6 +158,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (bloc) => bloc.fermer(),
       verify: (bloc) {
@@ -159,6 +173,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (cubit) => cubit
         ..nomModifier(nomTexte: 'Domen')
@@ -220,6 +235,7 @@ void main() {
       build: () => CreerClientCubit(
         utilisateurRepository: utilisateurRepository,
         navigatorState: navigatorState,
+        carteFideliteRepository: carteFideliteRepository,
       ),
       act: (cubit) => cubit
         ..nomModifier(nomTexte: 'Domen')

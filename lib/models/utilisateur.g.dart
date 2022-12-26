@@ -130,7 +130,7 @@ abstract class UtilisateurDocumentReference extends FirestoreDocumentReference<
   ///
   /// If no document exists yet, the update will fail.
   Future<void> update({
-    String uidUtilisateur,
+    String? uidUtilisateur,
     FieldValue uidUtilisateurFieldValue,
     String nom,
     FieldValue nomFieldValue,
@@ -147,7 +147,7 @@ abstract class UtilisateurDocumentReference extends FirestoreDocumentReference<
   /// The update will fail if applied to a document that does not exist.
   void transactionUpdate(
     Transaction transaction, {
-    String uidUtilisateur,
+    String? uidUtilisateur,
     FieldValue uidUtilisateurFieldValue,
     String nom,
     FieldValue nomFieldValue,
@@ -222,7 +222,7 @@ class _$UtilisateurDocumentReference
     );
     final json = {
       if (uidUtilisateur != _sentinel)
-        _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateur as String,
+        _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateur as String?,
       if (uidUtilisateurFieldValue != null)
         _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateurFieldValue,
       if (nom != _sentinel) _$UtilisateurFieldMap['nom']!: nom as String,
@@ -278,7 +278,7 @@ class _$UtilisateurDocumentReference
     );
     final json = {
       if (uidUtilisateur != _sentinel)
-        _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateur as String,
+        _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateur as String?,
       if (uidUtilisateurFieldValue != null)
         _$UtilisateurFieldMap['uidUtilisateur']!: uidUtilisateurFieldValue,
       if (nom != _sentinel) _$UtilisateurFieldMap['nom']!: nom as String,
@@ -403,8 +403,8 @@ abstract class UtilisateurQuery
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   });
   UtilisateurQuery whereNom({
     String? isEqualTo,
@@ -465,10 +465,10 @@ abstract class UtilisateurQuery
 
   UtilisateurQuery orderByUidUtilisateur({
     bool descending = false,
-    String startAt,
-    String startAfter,
-    String endAt,
-    String endBefore,
+    String? startAt,
+    String? startAfter,
+    String? endAt,
+    String? endBefore,
     UtilisateurDocumentSnapshot? startAtDocument,
     UtilisateurDocumentSnapshot? endAtDocument,
     UtilisateurDocumentSnapshot? endBeforeDocument,
@@ -713,8 +713,8 @@ class _$UtilisateurQuery
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   }) {
     return _$UtilisateurQuery(
       _collection,
@@ -1383,7 +1383,7 @@ class UtilisateurQueryDocumentSnapshot
 // **************************************************************************
 
 Utilisateur _$UtilisateurFromJson(Map<String, dynamic> json) => Utilisateur(
-      uidUtilisateur: json['uidUtilisateur'] as String,
+      uidUtilisateur: json['uidUtilisateur'] as String?,
       nom: json['nom'] as String,
       role: $enumDecode(_$RoleEnumMap, json['role']),
       mobile: json['mobile'] as String,

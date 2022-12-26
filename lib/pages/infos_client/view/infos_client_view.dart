@@ -1,3 +1,6 @@
+import 'package:fidelity/app/bloc/app_bloc.dart';
+import 'package:fidelity/models/magasin.dart';
+import 'package:fidelity/pages/ajout_achat/view/ajout_achat_page.dart';
 import 'package:fidelity/pages/infos_client/infos_client.dart';
 import 'package:fidelity/shared/constants/autres.dart';
 import 'package:fidelity/shared/constants/colors.dart';
@@ -16,6 +19,7 @@ class InfosClientView extends StatelessWidget {
     final infosClientCubit = context.watch<InfosClientCubit>();
 
     final width = (MediaQuery.of(context).size.width - 370) / 2;
+    final appBloc = context.watch<AppBloc>();
     return WillPopScope(
       onWillPop: () async => _retour(),
       child: Container(
@@ -28,7 +32,7 @@ class InfosClientView extends StatelessWidget {
               alignment: Alignment.topRight,
               child: BoutonFermer(
                 key: const Key('BtnQuitter'),
-                onPress: () => print('fermer'),
+                onPress: infosClientCubit.fermer,
               ),
             ),
             const SizedBox(
@@ -76,7 +80,7 @@ class InfosClientView extends StatelessWidget {
                                         size: 15,
                                       ),
                                       color: couleurBouton,
-                                      key: const Key('BtnDeconnexion'),
+                                      key: const Key('BtnModifierClient'),
                                     ),
                                   ],
                                 ),
@@ -84,7 +88,8 @@ class InfosClientView extends StatelessWidget {
                               const Spacer(),
                               Flexible(
                                 child: Text(
-                                  'Désignation : Tarik Ochet',
+                                  'Désignation : ${infosClientCubit.state.utilisateur.nom} '
+                                  '${infosClientCubit.state.utilisateur.prenom}',
                                   style: labelStyle,
                                 ),
                               ),
@@ -93,7 +98,7 @@ class InfosClientView extends StatelessWidget {
                               ),
                               Flexible(
                                 child: Text(
-                                  'Mail : mail@gmail.com',
+                                  'Mail : ${infosClientCubit.state.utilisateur.mail}',
                                   style: labelStyle,
                                 ),
                               ),
@@ -102,17 +107,18 @@ class InfosClientView extends StatelessWidget {
                               ),
                               Flexible(
                                 child: Text(
-                                  'Mobile : 0692 12 23 56',
+                                  'Mobile : ${infosClientCubit.state.utilisateur.mobile}',
                                   style: labelStyle,
                                 ),
                               ),
                               const SizedBox(
-                                height: 20,
+                                height: 10,
                               ),
                               Flexible(
                                 child: Text(
-                                  'Numéro carte fidélité : fAbcd854ed',
+                                  'Numéro carte fidélité : ${infosClientCubit.state.numeroCarte}',
                                   style: labelStyle,
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ],
@@ -147,7 +153,8 @@ class InfosClientView extends StatelessWidget {
                               Flexible(
                                 flex: 4,
                                 child: Text(
-                                  '150',
+                                  infosClientCubit.state.nbPointsFidelite
+                                      .toString(),
                                   style: labelTitre_50,
                                 ),
                               ),
@@ -194,8 +201,10 @@ class InfosClientView extends StatelessWidget {
                                 if (index == 0) {
                                   return InkWell(
                                     key: const Key('InkwellAjoutAchat'),
-                                    onTap: () => print('AjoutAchat'),
-                                    //onTap: listeClientCubit.creerClient,
+                                    onTap: () => _ajouterUnAchat(
+                                      appBloc: appBloc,
+                                      context: context,
+                                    ),
                                     child: Container(
                                       padding: EdgeInsets.zero,
                                       decoration: const BoxDecoration(
@@ -226,12 +235,6 @@ class InfosClientView extends StatelessWidget {
                                 return InkWell(
                                   key: const Key('InkwellLigneAchat'),
                                   onTap: () => print('Achat ${index - 1}'),
-                                  // onTap: () {
-                                  //   listeClientCubit.selectionneClient(
-                                  //     client: listeClientCubit
-                                  //         .state.listeClientsFiltre[index - 1],
-                                  //   );
-                                  // },
                                   child: Container(
                                     key: const Key('ContainerAchat'),
                                     padding: const EdgeInsets.all(10),
@@ -250,9 +253,7 @@ class InfosClientView extends StatelessWidget {
                                           children: [
                                             Flexible(
                                               child: Text(
-                                                // '${listeClientCubit.state.listeClientsFiltre[index - 1].nom} '
-                                                // '${listeClientCubit.state.listeClientsFiltre[index - 1].prenom}',
-                                                'Montant initial : 150 €',
+                                                'Montant initial : ${infosClientCubit.state.listeAchats[index - 1].montantInitial} €',
                                                 style: normalStyle_1,
                                                 key: const Key(
                                                   'TexteMontantInitial',
@@ -261,64 +262,58 @@ class InfosClientView extends StatelessWidget {
                                             ),
                                             Flexible(
                                               child: Text(
-                                                // '${listeClientCubit.state.listeClientsFiltre[index - 1].nom} '
-                                                // '${listeClientCubit.state.listeClientsFiltre[index - 1].prenom}',
-                                                'Montant initial : 150 €',
+                                                'Montant Final : ${infosClientCubit.state.listeAchats[index - 1].montantFinal} €',
                                                 style: normalStyle_1,
                                                 key: const Key(
                                                   'TexteMontantFinal',
                                                 ),
+                                                textAlign: TextAlign.left,
                                               ),
                                             ),
                                           ],
                                         ),
                                         Flexible(
                                           child: Text(
-                                            // listeClientCubit
-                                            //     .state
-                                            //     .listeClientsFiltre[index - 1]
-                                            //     .telephone,
-                                            'Points gagné : 15',
+                                            'Points gagné : ${infosClientCubit.state.listeAchats[index - 1].nombrePointsGagne}',
                                             style: normalStyle_1,
                                             key: const Key('TextePtsGagne'),
                                           ),
                                         ),
                                         Flexible(
                                           child: Text(
-                                            // listeClientCubit
-                                            //     .state.listeClientsFiltre[index - 1].mail,
-                                            'Points perdu : 0',
+                                            'Points perdu : ${infosClientCubit.state.listeAchats[index - 1].nombrePointsPerdu}',
                                             style: normalStyle_1,
                                             key: const Key('TextePtsPerdu'),
                                           ),
                                         ),
                                         Flexible(
                                           child: Text(
-                                            // listeClientCubit
-                                            //     .state.listeClientsFiltre[index - 1].mail,
-                                            'Magasin : Tampon',
+                                            'Magasin : ${infosClientCubit.state.listeAchats[index - 1].magasin.texte}',
                                             style: normalStyle_1,
                                             key: const Key('TexteMagasin'),
                                           ),
                                         ),
                                         BoutonSansTexte(
                                           onPress: () =>
-                                              print('supprimer ${index - 1}'),
+                                              infosClientCubit.supprimerAchat(
+                                            achat: infosClientCubit
+                                                .state.listeAchats[index - 1],
+                                          ),
                                           icon: const Icon(
                                             FontAwesomeIcons.trash,
                                             color: Colors.white,
                                             size: 15,
                                           ),
                                           color: couleurBoutonFermer,
-                                          key: const Key('BtnSupprimerClient'),
+                                          key: const Key('BtnSupprimerAchat'),
                                         ),
                                       ],
                                     ),
                                   ),
                                 );
                               },
-                              itemCount: 100,
-                              //itemCount: listeClientCubit.state.listeClientsFiltre.length + 1,
+                              itemCount:
+                                  infosClientCubit.state.listeAchats.length + 1,
                             ),
                           ),
                         ],
@@ -331,6 +326,18 @@ class InfosClientView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _ajouterUnAchat({
+    required BuildContext context,
+    required AppBloc appBloc,
+  }) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible:
+          true, // false = user must tap button, true = tap outside dialog
+      builder: (BuildContext dialogContext) => const AjoutAchatPage(),
     );
   }
 

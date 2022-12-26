@@ -26,18 +26,6 @@ void main() {
     );
   });
 
-  test('Redirection infos client', () {
-    const appState = AppState(
-      etapeApp: EtapeApp.infosClient,
-    );
-    expect(
-      onGenerateAppViewPages(appState: appState),
-      [
-        pageInfosClient,
-      ],
-    );
-  });
-
   test('Redirection connexion', () {
     const appState = AppState();
     expect(

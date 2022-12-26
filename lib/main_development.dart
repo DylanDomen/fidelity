@@ -10,7 +10,7 @@ import 'dart:async';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:fidelity/app/bloc/app_bloc.dart';
 import 'package:fidelity/bootstrap.dart';
-import 'package:fidelity/pages/connexion/connexion.dart';
+import 'package:fidelity/pages/liste_client/liste_client.dart';
 import 'package:fidelity/repository/achat_repository.dart';
 import 'package:fidelity/repository/authentification_repository.dart';
 import 'package:fidelity/repository/carte_fidelite_repository.dart';
@@ -51,9 +51,7 @@ Future<void> main() async {
       ],
       child: BlocProvider(
         create: (context) => appBloc,
-        child: const MaterialApp(
-          home: ConnexionPage(),
-        ),
+        child: ListeClientPage(),
       ),
     ),
   );

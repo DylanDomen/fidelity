@@ -13,9 +13,11 @@ List<Page<dynamic>> onGenerateAppViewPages({
     case EtapeApp.connexion:
       return [ConnexionPage.page()];
     case EtapeApp.listeClient:
-      print('route');
       return [ListeClientPage.page()];
     case EtapeApp.infosClient:
-      return [InfosClientPage.page()];
+      return [
+        ListeClientPage.page(),
+        InfosClientPage.page(),
+      ];
   }
 }

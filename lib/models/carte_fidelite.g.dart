@@ -132,7 +132,7 @@ abstract class CarteFideliteDocumentReference
   ///
   /// If no document exists yet, the update will fail.
   Future<void> update({
-    String uidCarteFidelite,
+    String? uidCarteFidelite,
     FieldValue uidCarteFideliteFieldValue,
     String numeroCarte,
     FieldValue numeroCarteFieldValue,
@@ -153,7 +153,7 @@ abstract class CarteFideliteDocumentReference
   /// The update will fail if applied to a document that does not exist.
   void transactionUpdate(
     Transaction transaction, {
-    String uidCarteFidelite,
+    String? uidCarteFidelite,
     FieldValue uidCarteFideliteFieldValue,
     String numeroCarte,
     FieldValue numeroCarteFieldValue,
@@ -247,7 +247,7 @@ class _$CarteFideliteDocumentReference extends FirestoreDocumentReference<
     final json = {
       if (uidCarteFidelite != _sentinel)
         _$CarteFideliteFieldMap['uidCarteFidelite']!:
-            uidCarteFidelite as String,
+            uidCarteFidelite as String?,
       if (uidCarteFideliteFieldValue != null)
         _$CarteFideliteFieldMap['uidCarteFidelite']!:
             uidCarteFideliteFieldValue,
@@ -333,7 +333,7 @@ class _$CarteFideliteDocumentReference extends FirestoreDocumentReference<
     final json = {
       if (uidCarteFidelite != _sentinel)
         _$CarteFideliteFieldMap['uidCarteFidelite']!:
-            uidCarteFidelite as String,
+            uidCarteFidelite as String?,
       if (uidCarteFideliteFieldValue != null)
         _$CarteFideliteFieldMap['uidCarteFidelite']!:
             uidCarteFideliteFieldValue,
@@ -474,8 +474,8 @@ abstract class CarteFideliteQuery
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   });
   CarteFideliteQuery whereNumeroCarte({
     String? isEqualTo,
@@ -558,10 +558,10 @@ abstract class CarteFideliteQuery
 
   CarteFideliteQuery orderByUidCarteFidelite({
     bool descending = false,
-    String startAt,
-    String startAfter,
-    String endAt,
-    String endBefore,
+    String? startAt,
+    String? startAfter,
+    String? endAt,
+    String? endBefore,
     CarteFideliteDocumentSnapshot? startAtDocument,
     CarteFideliteDocumentSnapshot? endAtDocument,
     CarteFideliteDocumentSnapshot? endBeforeDocument,
@@ -830,8 +830,8 @@ class _$CarteFideliteQuery
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   }) {
     return _$CarteFideliteQuery(
       _collection,
@@ -1710,7 +1710,7 @@ class CarteFideliteQueryDocumentSnapshot
 
 CarteFidelite _$CarteFideliteFromJson(Map<String, dynamic> json) =>
     CarteFidelite(
-      uidCarteFidelite: json['uidCarteFidelite'] as String,
+      uidCarteFidelite: json['uidCarteFidelite'] as String?,
       numeroCarte: json['numeroCarte'] as String,
       pointsFidelite: json['pointsFidelite'] as int,
       mobileUtilisateur: json['mobileUtilisateur'] as String,

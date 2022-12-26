@@ -18,11 +18,9 @@ class UtilisateurRepository {
     required Utilisateur utilisateur,
   }) async {
     try {
-      print(1);
       final user =
           await _authentificationRepository.inscriptionAvecEmailEtMotDePasse(
               email: utilisateur.mail, password: 'motdepassetest');
-      print(_authentificationRepository.etatConnexionCourant());
       final utilisateurDoc = await firestore
           .collection(nomCollection)
           .document(user.id)

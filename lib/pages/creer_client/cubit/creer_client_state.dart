@@ -8,6 +8,7 @@ class CreerClientState extends Equatable {
     this.mail = const Email.pure(),
     this.mobile = const Mobile.pure(),
     this.numCarteFidelite = const ChampTexte.pure(),
+    this.messageErreur = '',
   });
   final FormzStatus status;
   final ChampTexte nom;
@@ -15,6 +16,7 @@ class CreerClientState extends Equatable {
   final Email mail;
   final Mobile mobile;
   final ChampTexte numCarteFidelite;
+  final String messageErreur;
 
   CreerClientState copywith({
     FormzStatus? status,
@@ -23,6 +25,7 @@ class CreerClientState extends Equatable {
     Email? mail,
     Mobile? mobile,
     ChampTexte? numCarteFidelite,
+    String? messageErreur,
   }) {
     return CreerClientState(
       status: status ?? this.status,
@@ -31,6 +34,7 @@ class CreerClientState extends Equatable {
       mail: mail ?? this.mail,
       mobile: mobile ?? this.mobile,
       numCarteFidelite: numCarteFidelite ?? this.numCarteFidelite,
+      messageErreur: messageErreur ?? this.messageErreur,
     );
   }
 
@@ -42,5 +46,6 @@ class CreerClientState extends Equatable {
         mail,
         mobile,
         numCarteFidelite,
+        messageErreur,
       ];
 }

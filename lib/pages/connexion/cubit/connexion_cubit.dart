@@ -47,23 +47,38 @@ class ConnexionCubit extends Cubit<ConnexionState> {
     if (state.status.isValidated) {
       emit(state.copywith(status: FormzStatus.submissionInProgress));
       try {
-        print('dans try');
         await authentificationRepository.connexionAvecEmailEtMotDePasse(
           email: state.mail.value,
           password: state.motDePasse.value,
         );
-        print('avant add');
         appBloc.add(
           const RedirectionListeClient(),
         );
-        print('après add');
         emit(state.copywith(status: FormzStatus.submissionSuccess));
-      } catch (e) {
-        print(e);
-        emit(state.copywith(status: FormzStatus.submissionFailure));
+      } on LogInWithEmailAndPasswordFailure catch (e) {
+        emit(
+          state.copywith(
+            status: FormzStatus.submissionFailure,
+            messageErreur: e.message,
+          ),
+        );
+        emit(
+          state.copywith(
+            status: FormzStatus.submissionFailure,
+            messageErreur: '',
+          ),
+        );
       }
     } else {
-      emit(state.copywith(status: FormzStatus.submissionFailure));
+      emit(state.copywith(
+          status: FormzStatus.submissionFailure,
+          messageErreur: 'Formulaire invalide'));
+      emit(
+        state.copywith(
+          status: FormzStatus.submissionFailure,
+          messageErreur: '',
+        ),
+      );
     }
   }
 }

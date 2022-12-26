@@ -1,7 +1,4 @@
 import 'package:fidelity/app/bloc/app_bloc.dart';
-import 'package:fidelity/models/champs/champ_texte.dart';
-import 'package:fidelity/models/champs/email.dart';
-import 'package:fidelity/models/champs/mobile.dart';
 import 'package:fidelity/pages/creer_client/creer_client.dart';
 import 'package:fidelity/pages/liste_client/liste_client.dart';
 import 'package:fidelity/shared/constants/autres.dart';
@@ -120,8 +117,7 @@ class ListeClientView extends StatelessWidget {
                               key: const Key('TextFieldNom'),
                               formzInput: listeClientCubit.state.nom,
                               hintText: 'Tarik',
-                              messageErreur:
-                                  listeClientCubit.state.nom.error?.msgErreur,
+                              messageErreur: null,
                               prefixIcon: const Icon(
                                 FontAwesomeIcons.user,
                                 color: couleurIcons,
@@ -147,8 +143,7 @@ class ListeClientView extends StatelessWidget {
                               key: const Key('TextFieldMail'),
                               formzInput: listeClientCubit.state.mail,
                               hintText: 'mail@gmail.com',
-                              messageErreur:
-                                  listeClientCubit.state.mail.error?.msgErreur,
+                              messageErreur: null,
                               prefixIcon: const Icon(
                                 FontAwesomeIcons.envelope,
                                 color: couleurIcons,
@@ -174,8 +169,7 @@ class ListeClientView extends StatelessWidget {
                               key: const Key('TextFieldMobile'),
                               formzInput: listeClientCubit.state.mobile,
                               hintText: '0692122356',
-                              messageErreur: listeClientCubit
-                                  .state.mobile.error?.msgErreur,
+                              messageErreur: null,
                               prefixIcon: const Icon(
                                 Icons.phone,
                                 color: couleurIcons,

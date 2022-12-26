@@ -148,4 +148,71 @@ class CarteFideliteRepository {
 
     return const Stream.empty();
   }
+
+  Stream<CarteFidelite?> selectionneCarteFideliteViaUidUtilisateur({
+    required String uidUtilisateur,
+  }) {
+    if (uidUtilisateur != '') {
+      return firestore.collection(nomCollection).stream.map(
+            (listeCarteFideliteDoc) => listeCarteFideliteDoc
+                .map(
+                  (carteFideliteDoc) =>
+                      CarteFidelite.fromJson(carteFideliteDoc.map)
+                          .copywith(uidCarteFidelite: carteFideliteDoc.id),
+                )
+                .where(
+                  (carteFidelite) =>
+                      carteFidelite.uidUtilisateur == uidUtilisateur,
+                )
+                .first,
+          );
+    }
+    return const Stream.empty();
+  }
+
+  Future<CarteFidelite?> verifieCarteFideliteExisteViaUidUtilisateur({
+    required String uidUtilisateur,
+  }) async {
+    if (uidUtilisateur != '') {
+      final listeCarteFidelite =
+          await firestore.collection(nomCollection).get();
+      final carteFidelite = listeCarteFidelite
+          .map(
+            (carteFideliteDoc) => CarteFidelite.fromJson(carteFideliteDoc.map)
+                .copywith(uidCarteFidelite: carteFideliteDoc.id),
+          )
+          .where(
+            (carteFidelite) => carteFidelite.uidUtilisateur == uidUtilisateur,
+          )
+          .toList();
+
+      if (carteFidelite.isNotEmpty) {
+        return carteFidelite.first;
+      }
+      return null;
+    }
+  }
+
+  Future<CarteFidelite?> verifieCarteFideliteExisteViaNumeroCarte({
+    required String numeroCarte,
+  }) async {
+    if (numeroCarte != '') {
+      final listeCarteFidelite =
+          await firestore.collection(nomCollection).get();
+      final carteFidelite = listeCarteFidelite
+          .map(
+            (carteFideliteDoc) => CarteFidelite.fromJson(carteFideliteDoc.map)
+                .copywith(uidCarteFidelite: carteFideliteDoc.id),
+          )
+          .where(
+            (carteFidelite) => carteFidelite.numeroCarte == numeroCarte,
+          )
+          .toList();
+
+      if (carteFidelite.isNotEmpty) {
+        return carteFidelite.first;
+      }
+      return null;
+    }
+  }
 }

@@ -15,6 +15,7 @@ class ListeClientCubit extends Cubit<ListeClientState> {
     required this.appBloc,
   }) : super(const ListeClientState()) {
     utilisateurRepository.listeClients().listen((clients) {
+      print(123);
       emit(state.copywith(listeClients: clients));
       filtreClients();
     });
@@ -81,7 +82,7 @@ class ListeClientCubit extends Cubit<ListeClientState> {
 
   void deconnexion() {
     appBloc.add(
-      const Connexion(),
+      const Deconnexion(),
     );
   }
 }

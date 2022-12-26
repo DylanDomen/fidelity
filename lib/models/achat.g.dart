@@ -127,7 +127,7 @@ abstract class AchatDocumentReference
   ///
   /// If no document exists yet, the update will fail.
   Future<void> update({
-    String uidAchat,
+    String? uidAchat,
     FieldValue uidAchatFieldValue,
     double montantInitial,
     FieldValue montantInitialFieldValue,
@@ -146,7 +146,7 @@ abstract class AchatDocumentReference
   /// The update will fail if applied to a document that does not exist.
   void transactionUpdate(
     Transaction transaction, {
-    String uidAchat,
+    String? uidAchat,
     FieldValue uidAchatFieldValue,
     double montantInitial,
     FieldValue montantInitialFieldValue,
@@ -229,7 +229,7 @@ class _$AchatDocumentReference
     );
     final json = {
       if (uidAchat != _sentinel)
-        _$AchatFieldMap['uidAchat']!: uidAchat as String,
+        _$AchatFieldMap['uidAchat']!: uidAchat as String?,
       if (uidAchatFieldValue != null)
         _$AchatFieldMap['uidAchat']!: uidAchatFieldValue,
       if (montantInitial != _sentinel)
@@ -298,7 +298,7 @@ class _$AchatDocumentReference
     );
     final json = {
       if (uidAchat != _sentinel)
-        _$AchatFieldMap['uidAchat']!: uidAchat as String,
+        _$AchatFieldMap['uidAchat']!: uidAchat as String?,
       if (uidAchatFieldValue != null)
         _$AchatFieldMap['uidAchat']!: uidAchatFieldValue,
       if (montantInitial != _sentinel)
@@ -429,8 +429,8 @@ abstract class AchatQuery implements QueryReference<Achat, AchatQuerySnapshot> {
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   });
   AchatQuery whereMontantInitial({
     double? isEqualTo,
@@ -502,10 +502,10 @@ abstract class AchatQuery implements QueryReference<Achat, AchatQuerySnapshot> {
 
   AchatQuery orderByUidAchat({
     bool descending = false,
-    String startAt,
-    String startAfter,
-    String endAt,
-    String endBefore,
+    String? startAt,
+    String? startAfter,
+    String? endAt,
+    String? endBefore,
     AchatDocumentSnapshot? startAtDocument,
     AchatDocumentSnapshot? endAtDocument,
     AchatDocumentSnapshot? endBeforeDocument,
@@ -757,8 +757,8 @@ class _$AchatQuery extends QueryReference<Achat, AchatQuerySnapshot>
     String? isGreaterThan,
     String? isGreaterThanOrEqualTo,
     bool? isNull,
-    List<String>? whereIn,
-    List<String>? whereNotIn,
+    List<String?>? whereIn,
+    List<String?>? whereNotIn,
   }) {
     return _$AchatQuery(
       _collection,
@@ -1525,7 +1525,7 @@ class AchatQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Achat>
 // **************************************************************************
 
 Achat _$AchatFromJson(Map<String, dynamic> json) => Achat(
-      uidAchat: json['uidAchat'] as String,
+      uidAchat: json['uidAchat'] as String?,
       montantInitial: (json['montantInitial'] as num).toDouble(),
       montantFinal: (json['montantFinal'] as num).toDouble(),
       uidUtilisateur: json['uidUtilisateur'] as String,
